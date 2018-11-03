@@ -47,6 +47,8 @@ To test your configuration
 
 ```
 kubectl get svc
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.100.0.1   <none>        443/TCP   21m
 ```
 Note
 
