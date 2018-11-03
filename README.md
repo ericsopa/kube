@@ -1,6 +1,6 @@
 # kube
 
-Simple project to deploy Kubernetes on AWS EKS and deploy a hello world app with a database.
+Simple project to deploy Kubernetes on AWS EKS and deploy a hello world app with a database. All infrastructure must be defined as code and can thus be stood up and torn down at will in any environment.
 
 ## Getting Started
 
@@ -67,8 +67,8 @@ Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [cygwin](https://www.cygwin.com/) - GNU tools and Bash shell for Windows
-* [AWS CLI](https://aws.amazon.com/cli/) - AWS API for Bash aws-cli/1.16.45 Python/2.7.14
+* Bash [cygwin](https://www.cygwin.com/) - GNU tools and Bash shell for Windows
+* AWS CloudFormation [AWS CLI](https://aws.amazon.com/cli/) - AWS API for Bash aws-cli/1.16.45 Python/2.7.14
 * [jq](https://stedolan.github.io/jq/manual/) - JSON parsin tool v1.5
 
 ## Contributing
