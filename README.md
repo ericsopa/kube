@@ -43,6 +43,15 @@ End with an example of getting some data out of the system or using it for a lit
 
 ## Running the tests
 
+To test your configuration
+
+```
+kubectl get svc
+```
+Note
+
+If you receive the error "aws-iam-authenticator": executable file not found in $PATH, then your kubectl is not configured for Amazon EKS. For more information, see Configure kubectl for Amazon EKS.
+
 Explain how to run the automated tests for this system
 
 ### Break down into end to end tests
