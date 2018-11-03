@@ -1,6 +1,6 @@
 # kube
 
-Simple project to deploy Kuberneties on AWS EKS and deploy a hello world app with a database.
+Simple project to deploy Kubernetes on AWS EKS and deploy a hello world app with a database.
 
 ## Getting Started
 
