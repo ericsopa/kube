@@ -15,7 +15,7 @@ Bash
 GNU Make
 jq
 AWS Account
-AWS CLI
+AWS CLI > 1.16.18 & Python 3, or Python > 2.7.9
 AWS IAM User with Access Keys that have permission to administer the following services:
 * IAM
 * CloudFormation
