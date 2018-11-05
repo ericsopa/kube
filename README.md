@@ -46,13 +46,25 @@ End with an example of getting some data out of the system or using it for a lit
 To test your configuration
 
 ```
-kubectl get svc
+kubectl get svc --all-namespaces
 NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
 kubernetes   ClusterIP   10.100.0.1   <none>        443/TCP   21m
 ```
 Note
 
 If you receive the error "aws-iam-authenticator": executable file not found in $PATH, then your kubectl is not configured for Amazon EKS. For more information, see Configure kubectl for Amazon EKS.
+
+```
+kubectl get nodes --watch
+NAME                             STATUS     ROLES    AGE   VERSION
+ip-192-168-169-20.ec2.internal   NotReady   <none>   0s    v1.10.3
+ip-192-168-70-151.ec2.internal   NotReady   <none>   2s    v1.10.3
+ip-192-168-212-244.ec2.internal   NotReady   <none>   <invalid>   v1.10.3
+...
+ip-192-168-169-20.ec2.internal    Ready    <none>   39s   v1.10.3
+ip-192-168-212-244.ec2.internal   Ready    <none>   35s   v1.10.3
+ip-192-168-70-151.ec2.internal    Ready    <none>   42s   v1.10.3
+```
 
 Explain how to run the automated tests for this system
 
