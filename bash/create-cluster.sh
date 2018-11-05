@@ -38,9 +38,19 @@ echo Getting Security Groups...
 
 secgrps=$(echo $vpcstackjson | jq -r '.Stacks[].Outputs[] | select(.OutputKey=="SecurityGroups") | .OutputValue')
 
+echo Getting VPC ID...
+
+vpcid=$(echo $vpcstackjson | jq -r '.Stacks[].Outputs[] | select(.OutputKey=="VpcId") | .OutputValue')
+
 echo Security Groups: $secgrps
 
 # Create EKS Cluster
 echo "aws eks create-cluster --name dev --role-arn $rolearn --resources-vpc-config subnetIds=$subnets,securityGroupIds=$secgrps"
 
 aws eks create-cluster --name dev --role-arn $rolearn --resources-vpc-config subnetIds=$subnets,securityGroupIds=$secgrps
+
+cp ./cf/amazon-eks-nodegroup-parameters.json.template ./cf/amazon-eks-nodegroup-parameters.json
+
+sed -i "s/<vpcid>/$vpcid/g" ./cf/amazon-eks-nodegroup-parameters.json
+sed -i "s/<subnets>/$subnets/g" ./cf/amazon-eks-nodegroup-parameters.json
+sed -i "s/<secgrps>/$secgrps/g" ./cf/amazon-eks-nodegroup-parameters.json

@@ -1,0 +1,35 @@
+KeyName:
+    kubekeys
+
+NodeImageId:
+    ami-0440e4f6b9713faf6
+
+NodeInstanceType:
+    t2.small
+
+NodeAutoScalingGroupMinSize:
+# Default: 1 
+
+NodeAutoScalingGroupMaxSize:
+# Default: 3
+
+NodeVolumeSize:
+# Default: 20
+
+ClusterName:
+     dev
+
+BootstrapArguments:
+# Default: ""
+
+NodeGroupName:
+    devnodegrp
+
+ClusterControlPlaneSecurityGroup:
+    sg-?
+
+VpcId: no default
+    vpc-?
+
+Subnets:
+    subnet-?

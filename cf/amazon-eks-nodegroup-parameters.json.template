@@ -1,0 +1,38 @@
+[
+  {
+    "ParameterKey": "KeyName",
+    "ParameterValue": "kubekeys"
+  }, 
+  {
+    "ParameterKey": "NodeImageId",
+    "ParameterValue": "ami-0440e4f6b9713faf6"
+  }, 
+  {
+    "ParameterKey": "NodeInstanceType",
+    "ParameterValue": "t2.small"
+  }, 
+  {
+    "ParameterKey": "ClusterName",
+    "ParameterValue": "dev"
+  }, 
+  {
+    "ParameterKey": "BootstrapArguments",
+    "ParameterValue": ""
+  }, 
+  {
+    "ParameterKey": "NodeGroupName",
+    "ParameterValue": "devnodegrp"
+  }, 
+  {
+    "ParameterKey": "ClusterControlPlaneSecurityGroup",
+    "ParameterValue": "<secgrps>"
+  }, 
+  {
+    "ParameterKey": "VpcId",
+    "ParameterValue": "<vpcid>"
+  }, 
+  {
+    "ParameterKey": "Subnets",
+    "ParameterValue": "<subnets>"
+  } 
+]

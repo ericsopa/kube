@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#aws eks delete-cluster --name dev
+aws eks delete-cluster --name dev
 
 cstatus="\"DELETING\""
 
