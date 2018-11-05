@@ -39,7 +39,7 @@ To cleanup just...
 make clean
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+End with an example of getting some data out of the system or using it for a little demo--TODO
 
 ## Running the tests
 
@@ -66,11 +66,13 @@ ip-192-168-212-244.ec2.internal   Ready    <none>   35s   v1.10.3
 ip-192-168-70-151.ec2.internal    Ready    <none>   42s   v1.10.3
 ```
 
-Explain how to run the automated tests for this system
+Explain how to run the automated tests for this system--TODO
 
 ### Break down into end to end tests
 
-Explain what these tests test and why
+Explain what these tests test and why--TODO
+At the moment the only two tests are to ensure that the Kubernetes cluster is up and that the worker nodes have been created and are ready to use.
+As more functionality is added, more tests will be written.
 
 ```
 Give an example
@@ -78,7 +80,7 @@ Give an example
 
 ### And coding style tests
 
-Explain what these tests test and why
+Explain what these tests test and why--TODO
 
 ```
 Give an example
@@ -86,7 +88,7 @@ Give an example
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+Add additional notes about how to deploy this on a live system--TODO
 
 ## Built With
 
