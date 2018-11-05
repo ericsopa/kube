@@ -44,6 +44,7 @@ clean:
 	-aws cloudformation delete-stack --stack-name ekssrvrole
 	-aws ec2 delete-key-pair --key-name kubekeys
 	-rm kubekeys.json
+	-rm ./cf/amazon-eks-nodegroup-parameters.json
 	-rm ./cm/aws-auth-cm.yaml
 	-rm /usr/bin/kubectl.exe
 	-rm /usr/bin/aws-iam-authenticator.exe

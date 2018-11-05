@@ -6,7 +6,10 @@ outputs=0
 
 while [ "$outputs" == "0"  ]; do
 	outputs=$(aws cloudformation describe-stacks --stack-name ekssrvrole | grep -c Outputs)
+	sleep 10
 done
+
+aws cloudformation describe-stacks --stack-name ekssrvrole | grep -c Outputs
 
 echo Getting Role ARN...
 
@@ -20,7 +23,10 @@ outputs=0
 
 while [ "$outputs" == "0"  ]; do
 	outputs=$(aws cloudformation describe-stacks --stack-name eksvpc | grep -c Outputs)
+	sleep 10
 done
+
+aws cloudformation describe-stacks --stack-name eksvpc | grep -c Outputs
 
 echo Getting VPC Stack JSON...
 
