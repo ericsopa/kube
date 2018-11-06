@@ -4,7 +4,7 @@ Simple project to deploy Kubernetes on AWS EKS and deploy a hello world app with
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system. This code is based on [AWS Documentaion](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html)
 
 ### Prerequisites
 
