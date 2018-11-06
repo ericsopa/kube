@@ -80,7 +80,11 @@ Finally, connect to the Guestbook app by using the EXTERNAL-IP above on port 300
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system--TODO
+Note
+
+You may receive an error that one of the Availability Zones in your request does not have sufficient capacity to create an Amazon EKS cluster. If this happens, the error output contains the Availability Zones that can support a new cluster. Retry creating your cluster with at least two subnets that are located in the supported Availability Zones for your account.
+
+The repo contains different eksvpc.yaml files with 2 or 5 subnets in different Availability Zones. You can control which AZs the subnets go in and you may have to work around this limitation in the AWS EKS service to get it working.
 
 ## Built With
 
