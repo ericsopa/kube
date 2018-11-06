@@ -78,26 +78,6 @@ redis-slave    ClusterIP      10.100.89.127    <none>                           
 Finally, connect to the Guestbook app by using the EXTERNAL-IP above on port 3000, like:
  http://a4ef127f7e17a11e89f900aa47ab6f8e-1637274877.us-east-1.elb.amazonaws.com:3000
 
-Explain how to run the automated tests for this system--TODO
-
-### Break down into end to end tests
-
-Explain what these tests test and why--TODO
-At the moment the only two tests are to ensure that the Kubernetes cluster is up and that the worker nodes have been created and are ready to use.
-As more functionality is added, more tests will be written.
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why--TODO
-
-```
-Give an example
-```
-
 ## Deployment
 
 Add additional notes about how to deploy this on a live system--TODO
