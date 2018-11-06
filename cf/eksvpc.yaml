@@ -23,6 +23,15 @@ Parameters:
     Type: String
     Default: 192.168.192.0/18
     Description: CidrBlock for subnet 03 within the VPC
+  Subnet04Block:
+    Type: String
+    Default: 192.168.1.0/24
+    Description: CidrBlock for subnet 04 within the VPC
+  Subnet05Block:
+    Type: String
+    Default: 192.168.32.0/24
+    Description: CidrBlock for subnet 05 within the VPC
+
 
 Metadata:
   AWS::CloudFormation::Interface:
@@ -35,6 +44,9 @@ Metadata:
           - Subnet01Block
           - Subnet02Block
           - Subnet03Block
+          - Subnet04Block
+          - Subnet05Block
+
 
 Resources:
   VPC:
@@ -127,6 +139,40 @@ Resources:
       Tags:
       - Key: Name
         Value: !Sub "${AWS::StackName}-Subnet03"
+  Subnet04:
+    Type: AWS::EC2::Subnet
+    Metadata:
+      Comment: Subnet 04
+    Properties:
+      AvailabilityZone:
+        Fn::Select:
+        - '3'
+        - Fn::GetAZs:
+            Ref: AWS::Region
+      CidrBlock:
+        Ref: Subnet04Block
+      VpcId:
+        Ref: VPC
+      Tags:
+      - Key: Name
+        Value: !Sub "${AWS::StackName}-Subnet04"
+  Subnet05:
+    Type: AWS::EC2::Subnet
+    Metadata:
+      Comment: Subnet 05
+    Properties:
+      AvailabilityZone:
+        Fn::Select:
+        - '4'
+        - Fn::GetAZs:
+            Ref: AWS::Region
+      CidrBlock:
+        Ref: Subnet05Block
+      VpcId:
+        Ref: VPC
+      Tags:
+      - Key: Name
+        Value: !Sub "${AWS::StackName}-Subnet05"
 
   Subnet01RouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
@@ -145,6 +191,17 @@ Resources:
     Properties:
       SubnetId: !Ref Subnet03
       RouteTableId: !Ref RouteTable
+  Subnet04RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref Subnet04
+      RouteTableId: !Ref RouteTable
+  Subnet05RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref Subnet05
+      RouteTableId: !Ref RouteTable
+
 
   ControlPlaneSecurityGroup:
     Type: AWS::EC2::SecurityGroup
@@ -156,7 +213,7 @@ Outputs:
 
   SubnetIds:
     Description: All subnets in the VPC
-    Value: !Join [ ",", [ !Ref Subnet01, !Ref Subnet02, !Ref Subnet03 ] ]
+    Value: !Join [ ",", [ !Ref Subnet01, !Ref Subnet02, !Ref Subnet03, !Ref Subnet04, !Ref Subnet05 ] ]
 
   SecurityGroups:
     Description: Security group for the cluster control plane communication with worker nodes
