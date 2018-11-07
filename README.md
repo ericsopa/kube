@@ -66,29 +66,25 @@ ip-192-168-212-244.ec2.internal   Ready    <none>   35s   v1.10.3
 ip-192-168-70-151.ec2.internal    Ready    <none>   42s   v1.10.3
 ```
 
-Explain how to run the automated tests for this system--TODO
-
-### Break down into end to end tests
-
-Explain what these tests test and why--TODO
-At the moment the only two tests are to ensure that the Kubernetes cluster is up and that the worker nodes have been created and are ready to use.
-As more functionality is added, more tests will be written.
-
+Query the services in your cluster and wait until the External IP column for the guestbook service is populated.
 ```
-Give an example
+kubectl get services -o wide
+NAME           TYPE           CLUSTER-IP       EXTERNAL-IP                                                               PORT(S)          AGE   SELECTOR
+guestbook      LoadBalancer   10.100.137.200   a4ef127f7e17a11e89f900aa47ab6f8e-1637274877.us-east-1.elb.amazonaws.com   3000:32522/TCP   2m    app=guestbook
+kubernetes     ClusterIP      10.100.0.1       <none>                                                                    443/TCP          26m   <none>
+redis-master   ClusterIP      10.100.108.138   <none>                                                                    6379/TCP         3m    app=redis,role=master
+redis-slave    ClusterIP      10.100.89.127    <none>                                                                    6379/TCP         2m    app=redis,role=slave
 ```
-
-### And coding style tests
-
-Explain what these tests test and why--TODO
-
-```
-Give an example
-```
+Finally, connect to the Guestbook app by using the EXTERNAL-IP above on port 3000, like:
+ http://a4ef127f7e17a11e89f900aa47ab6f8e-1637274877.us-east-1.elb.amazonaws.com:3000
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system--TODO
+Note
+
+You may receive an error that one of the Availability Zones in your request does not have sufficient capacity to create an Amazon EKS cluster. If this happens, the error output contains the Availability Zones that can support a new cluster. Retry creating your cluster with at least two subnets that are located in the supported Availability Zones for your account.
+
+The repo contains different eksvpc.yaml files with 2 or 5 subnets in different Availability Zones. You can control which AZs the subnets go in and you may have to work around this limitation in the AWS EKS service to get it working.
 
 ## Built With
 
