@@ -73,10 +73,9 @@ all:	eks guestbook
 
 clean:
 	-kubectl delete rc/redis-master rc/redis-slave rc/guestbook svc/redis-master svc/redis-slave svc/guestbook
-	-aws cloudformation delete-stack --stack-name dev-worker-nodes
+	-./bash/clean-workers.sh
 	-./bash/delete-cluster.sh
-	-aws cloudformation delete-stack --stack-name eksvpc 
-	-aws cloudformation delete-stack --stack-name ekssrvrole
+	-./bash/clean-vpc-role.sh
 	-aws ec2 delete-key-pair --key-name kubekeys
 	-rm kubekeys.json
 	-rm ./cf/amazon-eks-nodegroup-parameters.json
