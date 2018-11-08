@@ -69,7 +69,7 @@ guestbook: rc-redis-master svc-redis-master rc-redis-slave svc-redis-slave rc-gu
 
 eks:	role vpc cluster kubectl aws-iam-auth clusterchk updkubconf kubekeys workernodes confman
 
-all:	role vpc cluster kubectl aws-iam-auth clusterchk updkubconf kubekeys workernodes confman guestbook
+all:	eks guestbook
 
 clean:
 	-kubectl delete rc/redis-master rc/redis-slave rc/guestbook svc/redis-master svc/redis-slave svc/guestbook
