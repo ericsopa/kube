@@ -35,6 +35,23 @@ confman:
 	-bash/aws-auth-cm.sh
 	-kubectl apply -f ./cm/aws-auth-cm.yaml
 
+#Deploying your first simple app on K8s cluster
+#Creat "first-app" namespace to deploy the application
+first-app-ns:
+	-kubectl create -f app-manifests/first-app-ns.yaml
+	-sleep 5
+
+#Create the deployment for application with three replicas
+simple-deployment:
+	-kubectl create -f app-manifests/simple-deployment.yaml
+
+#Create a service pointing to the deployment pods fro exposing the application
+#Sleep 30 sec for service to come-up and create a load balancer resource in AWS
+simple-service:
+	-kubectl create -f app-manifests/simple-service.yaml
+	-sleep 30
+	-echo "Access application at ----> http://$(kubectl get svc -n first-app -o wide | awk 'FNR == 2 {print $4}')"
+
 #Create the Redis master replication controller
 rc-redis-master:
 	-kubectl apply -f https://raw.githubusercontent.com/kubernetes/kubernetes/v1.10.3/examples/guestbook-go/redis-master-controller.json
@@ -65,13 +82,16 @@ svc-guestbook:
 	-kubectl apply -f https://raw.githubusercontent.com/kubernetes/kubernetes/v1.10.3/examples/guestbook-go/guestbook-service.json
 	-sleep 5
 
+first-app: first-app-ns simple-deployment simple-service
+
 guestbook: rc-redis-master svc-redis-master rc-redis-slave svc-redis-slave rc-guestbook svc-guestbook
 
 eks:	role vpc cluster kubectl aws-iam-auth clusterchk updkubconf kubekeys workernodes confman
 
-all:	eks guestbook
+all:	eks guestbook first-app
 
 clean:
+	-kubectl delete ns/first-app
 	-kubectl delete rc/redis-master rc/redis-slave rc/guestbook svc/redis-master svc/redis-slave svc/guestbook
 	-./bash/clean-workers.sh
 	-./bash/delete-cluster.sh

@@ -1,0 +1,14 @@
+# This is a service manifest to load balance the traffic between the pods
+kind: Service
+apiVersion: v1
+metadata:
+  name: simple-service
+  namespace: first-app
+spec:
+  selector:
+    k8s-app: simple
+  ports:
+  - protocol: TCP
+    port: 80
+  type: LoadBalancer
+
