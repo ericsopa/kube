@@ -53,46 +53,46 @@ simple-service:
 	-echo "Access application at ----> http://$(kubectl get svc -n first-app -o wide | awk 'FNR == 2 {print $4}')"
 
 #Create the Redis master replication controller
-rc-redis-master:
-	-kubectl apply -f https://raw.githubusercontent.com/kubernetes/kubernetes/v1.10.3/examples/guestbook-go/redis-master-controller.json
-	-sleep 5
+#rc-redis-master:
+#	-kubectl apply -f https://raw.githubusercontent.com/kubernetes/kubernetes/v1.10.3/examples/guestbook-go/redis-master-controller.json
+#	-sleep 5
 
 #Create the Redis master service
-svc-redis-master:
-	-kubectl apply -f https://raw.githubusercontent.com/kubernetes/kubernetes/v1.10.3/examples/guestbook-go/redis-master-service.json
-	-sleep 5
+#svc-redis-master:
+#	-kubectl apply -f https://raw.githubusercontent.com/kubernetes/kubernetes/v1.10.3/examples/guestbook-go/redis-master-service.json
+#	-sleep 5
 
 #Create the Redis slave replication controller
-rc-redis-slave:
-	-kubectl apply -f https://raw.githubusercontent.com/kubernetes/kubernetes/v1.10.3/examples/guestbook-go/redis-slave-controller.json
-	-sleep 5
+#rc-redis-slave:
+#	-kubectl apply -f https://raw.githubusercontent.com/kubernetes/kubernetes/v1.10.3/examples/guestbook-go/redis-slave-controller.json
+#	-sleep 5
 
 #Create the Redis slave service
-svc-redis-slave:
-	-kubectl apply -f https://raw.githubusercontent.com/kubernetes/kubernetes/v1.10.3/examples/guestbook-go/redis-slave-service.json
-	-sleep 5
+#svc-redis-slave:
+#	-kubectl apply -f https://raw.githubusercontent.com/kubernetes/kubernetes/v1.10.3/examples/guestbook-go/redis-slave-service.json
+#	-sleep 5
 
 #Create the guestbook replication controller
-rc-guestbook:
-	-kubectl apply -f https://raw.githubusercontent.com/kubernetes/kubernetes/v1.10.3/examples/guestbook-go/guestbook-controller.json
-	-sleep 5
+#rc-guestbook:
+#	-kubectl apply -f https://raw.githubusercontent.com/kubernetes/kubernetes/v1.10.3/examples/guestbook-go/guestbook-controller.json
+#	-sleep 5
 
 #Create the guestbook service
-svc-guestbook:
-	-kubectl apply -f https://raw.githubusercontent.com/kubernetes/kubernetes/v1.10.3/examples/guestbook-go/guestbook-service.json
-	-sleep 5
+#svc-guestbook:
+#	-kubectl apply -f https://raw.githubusercontent.com/kubernetes/kubernetes/v1.10.3/examples/guestbook-go/guestbook-service.json
+#	-sleep 5
 
 first-app: first-app-ns simple-deployment simple-service
 
-guestbook: rc-redis-master svc-redis-master rc-redis-slave svc-redis-slave rc-guestbook svc-guestbook
+#guestbook: rc-redis-master svc-redis-master rc-redis-slave svc-redis-slave rc-guestbook svc-guestbook
 
 eks:	role vpc cluster kubectl aws-iam-auth clusterchk updkubconf kubekeys workernodes confman
 
-all:	eks guestbook first-app
+all:	eks first-app
 
 clean:
 	-kubectl delete ns/first-app
-	-kubectl delete rc/redis-master rc/redis-slave rc/guestbook svc/redis-master svc/redis-slave svc/guestbook
+	#-kubectl delete rc/redis-master rc/redis-slave rc/guestbook svc/redis-master svc/redis-slave svc/guestbook
 	-./bash/clean-workers.sh
 	-./bash/delete-cluster.sh
 	-./bash/clean-vpc-role.sh
