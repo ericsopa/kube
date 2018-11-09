@@ -67,7 +67,7 @@ ip-192-168-70-151.ec2.internal    Ready    <none>   42s   v1.10.3
 ```
 #### First-app Deployment Test:
 
-Look out for the URL to access your first deployed application on EKS cluster at the termination of the `Make all` command.
+Look out for the URL to access your first deployed application on EKS cluster, at the termination/end of the `make all` command.
 
 It lookes like *Access your application at ----> ***http://a4ef127f7e17a11e89f900aa47ab6f8e-1637274877.us-east-1.elb.amazonaws.com****
 
