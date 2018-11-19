@@ -65,18 +65,11 @@ ip-192-168-169-20.ec2.internal    Ready    <none>   39s   v1.10.3
 ip-192-168-212-244.ec2.internal   Ready    <none>   35s   v1.10.3
 ip-192-168-70-151.ec2.internal    Ready    <none>   42s   v1.10.3
 ```
+#### First-app Deployment Test:
 
-Query the services in your cluster and wait until the External IP column for the guestbook service is populated.
-```
-kubectl get services -o wide
-NAME           TYPE           CLUSTER-IP       EXTERNAL-IP                                                               PORT(S)          AGE   SELECTOR
-guestbook      LoadBalancer   10.100.137.200   a4ef127f7e17a11e89f900aa47ab6f8e-1637274877.us-east-1.elb.amazonaws.com   3000:32522/TCP   2m    app=guestbook
-kubernetes     ClusterIP      10.100.0.1       <none>                                                                    443/TCP          26m   <none>
-redis-master   ClusterIP      10.100.108.138   <none>                                                                    6379/TCP         3m    app=redis,role=master
-redis-slave    ClusterIP      10.100.89.127    <none>                                                                    6379/TCP         2m    app=redis,role=slave
-```
-Finally, connect to the Guestbook app by using the EXTERNAL-IP above on port 3000, like:
- http://a4ef127f7e17a11e89f900aa47ab6f8e-1637274877.us-east-1.elb.amazonaws.com:3000
+Look out for the URL to access your first deployed application on EKS cluster, at the termination/end of the `make all` command.
+
+It lookes like *Access your application at ----> ***http://a4ef127f7e17a11e89f900aa47ab6f8e-1637274877.us-east-1.elb.amazonaws.com****
 
 ## Deployment
 

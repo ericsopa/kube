@@ -35,44 +35,64 @@ confman:
 	-bash/aws-auth-cm.sh
 	-kubectl apply -f ./cm/aws-auth-cm.yaml
 
-#Create the Redis master replication controller
-rc-redis-master:
-	-kubectl apply -f https://raw.githubusercontent.com/kubernetes/kubernetes/v1.10.3/examples/guestbook-go/redis-master-controller.json
+#Deploying your first simple app on K8s cluster
+#Creat "first-app" namespace to deploy the application
+first-app-ns:
+	-kubectl create -f app-manifests/first-app-ns.yaml
 	-sleep 5
+
+#Create the deployment for application with three replicas
+simple-deployment:
+	-kubectl create -f app-manifests/simple-deployment.yaml
+
+#Create a service pointing to the deployment pods fro exposing the application
+#Sleep 30 sec for service to come-up and create a load balancer resource in AWS
+simple-service:
+	-kubectl create -f app-manifests/simple-service.yaml
+	-sleep 30
+	-echo "Access application at ----> http://$(kubectl get svc -n first-app -o wide | awk 'FNR == 2 {print $4}')"
+
+#Create the Redis master replication controller
+#rc-redis-master:
+#	-kubectl apply -f https://raw.githubusercontent.com/kubernetes/kubernetes/v1.10.3/examples/guestbook-go/redis-master-controller.json
+#	-sleep 5
 
 #Create the Redis master service
-svc-redis-master:
-	-kubectl apply -f https://raw.githubusercontent.com/kubernetes/kubernetes/v1.10.3/examples/guestbook-go/redis-master-service.json
-	-sleep 5
+#svc-redis-master:
+#	-kubectl apply -f https://raw.githubusercontent.com/kubernetes/kubernetes/v1.10.3/examples/guestbook-go/redis-master-service.json
+#	-sleep 5
 
 #Create the Redis slave replication controller
-rc-redis-slave:
-	-kubectl apply -f https://raw.githubusercontent.com/kubernetes/kubernetes/v1.10.3/examples/guestbook-go/redis-slave-controller.json
-	-sleep 5
+#rc-redis-slave:
+#	-kubectl apply -f https://raw.githubusercontent.com/kubernetes/kubernetes/v1.10.3/examples/guestbook-go/redis-slave-controller.json
+#	-sleep 5
 
 #Create the Redis slave service
-svc-redis-slave:
-	-kubectl apply -f https://raw.githubusercontent.com/kubernetes/kubernetes/v1.10.3/examples/guestbook-go/redis-slave-service.json
-	-sleep 5
+#svc-redis-slave:
+#	-kubectl apply -f https://raw.githubusercontent.com/kubernetes/kubernetes/v1.10.3/examples/guestbook-go/redis-slave-service.json
+#	-sleep 5
 
 #Create the guestbook replication controller
-rc-guestbook:
-	-kubectl apply -f https://raw.githubusercontent.com/kubernetes/kubernetes/v1.10.3/examples/guestbook-go/guestbook-controller.json
-	-sleep 5
+#rc-guestbook:
+#	-kubectl apply -f https://raw.githubusercontent.com/kubernetes/kubernetes/v1.10.3/examples/guestbook-go/guestbook-controller.json
+#	-sleep 5
 
 #Create the guestbook service
-svc-guestbook:
-	-kubectl apply -f https://raw.githubusercontent.com/kubernetes/kubernetes/v1.10.3/examples/guestbook-go/guestbook-service.json
-	-sleep 5
+#svc-guestbook:
+#	-kubectl apply -f https://raw.githubusercontent.com/kubernetes/kubernetes/v1.10.3/examples/guestbook-go/guestbook-service.json
+#	-sleep 5
 
-guestbook: rc-redis-master svc-redis-master rc-redis-slave svc-redis-slave rc-guestbook svc-guestbook
+first-app: first-app-ns simple-deployment simple-service
+
+#guestbook: rc-redis-master svc-redis-master rc-redis-slave svc-redis-slave rc-guestbook svc-guestbook
 
 eks:	role vpc cluster kubectl aws-iam-auth clusterchk updkubconf kubekeys workernodes confman
 
-all:	eks guestbook
+all:	eks first-app
 
 clean:
-	-kubectl delete rc/redis-master rc/redis-slave rc/guestbook svc/redis-master svc/redis-slave svc/guestbook
+	-kubectl delete ns/first-app
+	#-kubectl delete rc/redis-master rc/redis-slave rc/guestbook svc/redis-master svc/redis-slave svc/guestbook
 	-./bash/clean-workers.sh
 	-./bash/delete-cluster.sh
 	-./bash/clean-vpc-role.sh

@@ -1,0 +1,24 @@
+#This is a manifest file to deploy a static Web application
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: simple-deployment
+  namespace: first-app
+  labels:
+    k8s-app: simple
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      k8s-app: simple
+  template:
+    metadata:
+      labels:
+        k8s-app: simple
+    spec:
+      containers:
+        - name: nginx
+          image: quay.io/coreos/example-app:v1.0
+          ports:
+            - name: http
+              containerPort: 80
